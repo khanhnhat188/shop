@@ -1,23 +1,21 @@
 <?php
+session_start();
     // Kiểm tra nếu có dữ liệu được gửi đi từ form
     if(isset($_POST['dangky'])){
         // Lấy dữ liệu từ form
         $ten = $_POST['ten'];
         $email = $_POST['email'];
         $dienthoai = $_POST['dienthoai'];
-        $matkhau = $_POST['matkhau'];
+        $matkhau = md5($_POST['matkhau']);
         $diachi = $_POST['diachi'];
 
         // Thực hiện truy vấn SQL để thêm dữ liệu vào cơ sở dữ liệu
         $sql_dangky = "INSERT INTO dangky(tenkhachhang, email, dienthoai, matkhau, diachi) VALUES ('$ten', '$email', '$dienthoai', '$matkhau', '$diachi')";
         $query_dangky = mysqli_query($conn, $sql_dangky);
-
-        // Kiểm tra xem truy vấn có thành công không
-        if($query_dangky){
-            echo '<script>alert("Đăng ký thành công"); window.location="index.php";</script>';
-        } else {
-            echo '<script>alert("Đăng ký thất bại");</script>';
-        }
+      if($query_dangky){
+        $_SESSION['dangky'] = $ten;
+        header('location:index.php?quanly=giohang');
+    }
     }
 ?>
 

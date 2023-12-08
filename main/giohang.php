@@ -14,6 +14,9 @@
 </div>
 <!-- Page Header End -->
 <div class="container-fluid">
+<p class="m-2"><?php if (isset($_SESSION['dangky'])) {
+    echo "Xin chào ".$_SESSION['dangky'];
+} ?></p>
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
             <table class="table table-bordered text-center mb-0">
@@ -75,23 +78,23 @@
             <?php if (!empty($_SESSION['cart'])) : ?>
             <form class="mb-5" action="">
                 <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                    <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
                     <div class="input-group-append">
-                        <button class="btn btn-primary">Apply Coupon</button>
+                        <button class="btn btn-primary">Áp dụng</button>
                     </div>
                 </div>
             </form>
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
-                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    <h4 class="font-weight-semi-bold m-0">Thông tin</h4>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
-                        <h6 class="font-weight-medium">Subtotal</h6>
+                        <h6 class="font-weight-medium">Tổng cộng</h6>
                         <h6 class="font-weight-medium"><?php echo number_format($tongtien); ?></h6>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">Phí vận chuyển</h6>
                         <h6 class="font-weight-medium"><?php ?></h6>
                     </div>
                 </div>
@@ -100,21 +103,31 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold"><?php echo number_format($tongtien); ?></h5>
                     </div>
-                    <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                    <?php
+                        if (isset($_SESSION['dangky'])) {
+                    ?>
+                    <button class="btn btn-block btn-primary my-3 py-3">Thanh toán</button>
+                    <?php
+                        }else {
+                    ?>
+                    <a href="./index.php?quanly=dangky">Đăng ký để thanh toán</a>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
             <?php else : ?>
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
-                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    <h4 class="font-weight-semi-bold m-0">Thông tin</h4>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
-                        <h6 class="font-weight-medium">Subtotal</h6>
+                        <h6 class="font-weight-medium">Tổng cộng</h6>
                         <h6 class="font-weight-medium">0.00</h6>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">Phí vận chuyển</h6>
                         <h6 class="font-weight-medium">0.00</h6>
                     </div>
                 </div>
@@ -123,7 +136,7 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold">0.00</h5>
                     </div>
-                    <button class="btn btn-block btn-primary my-3 py-3" disabled>Proceed To Checkout</button>
+                    <button class="btn btn-block btn-primary my-3 py-3" disabled>Thanh toán</button>
                 </div>
             </div>
             <?php endif; ?>
