@@ -42,24 +42,28 @@ session_start();
                             <form method="POST" action="">
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="ten">Họ và tên</label>
-                                    <input type="text" name="ten" class="form-control form-control-lg" />
+                                    <input type="text" name="ten" class="form-control form-control-lg" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="email">Email</label>
-                                    <input type="email" name="email" class="form-control form-control-lg" />
+                                    <input type="email" name="email" class="form-control form-control-lg" required />
                                 </div>
+
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="matkhau">Mật khẩu</label>
-                                    <input type="password" name="matkhau" class="form-control form-control-lg" />
+                                    <input type="password" name="matkhau" class="form-control form-control-lg"
+                                        required />
                                 </div>
+
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="dienthoai">Điện thoại</label>
-                                    <input type="text" name="dienthoai" class="form-control form-control-lg" />
+                                    <input type="text" name="dienthoai" class="form-control form-control-lg" required />
                                 </div>
+
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="diachi">Địa chỉ</label>
-                                    <input type="text" name="diachi" class="form-control form-control-lg" />
+                                    <input type="text" name="diachi" class="form-control form-control-lg" required />
                                 </div>
 
                                 <div class="d-flex justify-content-center">
@@ -67,10 +71,11 @@ session_start();
                                         class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Đăng
                                         ký</button>
                                 </div>
-                                
-                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+
+                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#"
                                         class="fw-bold text-body"><u>Login here</u></a></p>
                             </form>
+
                         </div>
                     </div>
                 </div>
