@@ -14,8 +14,10 @@
             include("main/sanpham.php");
         }elseif($tam=='giohang'){
             include("main/giohang.php");
+        }elseif($tam=='dangky'){
+            include("main/dangky.php");
         }elseif($tam=='timkiem'){
-                include("main/search.php");
+            include("main/search.php");
         }else{
             include("main/index.php");
         }

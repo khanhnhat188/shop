@@ -15,11 +15,10 @@
     <title>Bán Hàng</title>
 </head>
 <body>
-    <div class="container-fluid"> 
+    <div class="wrapper"> 
         <?php
             include "page/header.php";
             include "page/menu.php";
-            include "page/navbar.php";
             include "page/main.php";
             include "page/footer.php";
         ?>

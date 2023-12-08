@@ -15,6 +15,7 @@
         ?>
         <li><a class="one" href="index.php?quanly=giohang">Giỏ hàng</a></li>
         <li><a class="one" href="admin/login.php">Đăng nhập</a></li>
+        <li><a class="one" href="index.php?quanly=dangky">Đăng ký</a></li>
     </ul>
     <div class="topnav">
         <div class="search-container">

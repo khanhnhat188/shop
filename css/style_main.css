@@ -58,22 +58,10 @@ input.them{
     border-radius: 4px;
     cursor: pointer;
 }
-.header{
-    border: 1px solid #ff80ff;
-    height: 70px;
-    width: 100%;
-    background: #ee0033;
-}
-.header img{
-    padding: 10px 15px;
-}
-.logo{
-    margin-top: 7px;
-}
-.banner{
-    float: right;
-    width: 70%;
-    height: 44px;
+.wrapper{
+    height: auto;
+    width: 90%;
+    margin: 0 auto;
 }
 
 

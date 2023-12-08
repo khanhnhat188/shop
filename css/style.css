@@ -2365,6 +2365,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #212529;
+  border-radius: 13px;
   background-color: #D19C97;
   border-color: #D19C97;
 }
@@ -9327,10 +9328,10 @@ a.text-dark:hover, a.text-dark:focus {
   color: black !important;
 }
 
-.text-body {
+/* .text-body {
   color: #6F6F6F !important;
 }
-
+ */
 .text-muted {
   color: #6c757d !important;
 }
