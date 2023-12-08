@@ -1990,8 +1990,7 @@ select.form-control:focus::-ms-value {
 .form-control-lg {
   height: calc(1.5em + 1rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
+  /* line-height: 1.5; */
 }
 
 select.form-control[size], select.form-control[multiple] {

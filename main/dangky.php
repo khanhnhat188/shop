@@ -1,22 +1,29 @@
 <?php
 session_start();
-    // Kiểm tra nếu có dữ liệu được gửi đi từ form
-    if(isset($_POST['dangky'])){
-        // Lấy dữ liệu từ form
-        $ten = $_POST['ten'];
-        $email = $_POST['email'];
-        $dienthoai = $_POST['dienthoai'];
-        $matkhau = md5($_POST['matkhau']);
-        $diachi = $_POST['diachi'];
+// Kiểm tra nếu có dữ liệu được gửi đi từ form
+if (isset($_POST['dangky'])) {
+    // Lấy dữ liệu từ form
+    $ten = $_POST['ten'];
+    $email = $_POST['email'];
+    $dienthoai = $_POST['dienthoai'];
+    $matkhau = password_hash($_POST['matkhau'], PASSWORD_DEFAULT);
+    $ap = $_POST['diachi'];
+    // Lấy giá trị từ form
+    $tinhThanhPho = $_POST['tinh_thanhpho'];
+    $huyen = $_POST['huyen'];
+    $xa = $_POST['xa'];
 
-        // Thực hiện truy vấn SQL để thêm dữ liệu vào cơ sở dữ liệu
-        $sql_dangky = "INSERT INTO dangky(tenkhachhang, email, dienthoai, matkhau, diachi) VALUES ('$ten', '$email', '$dienthoai', '$matkhau', '$diachi')";
-        $query_dangky = mysqli_query($conn, $sql_dangky);
-      if($query_dangky){
+    // Kết hợp giá trị thành một chuỗi
+    $diachi = "$ap, $xa, $huyen, $tinhThanhPho";
+    // Thực hiện truy vấn SQL để thêm dữ liệu vào cơ sở dữ liệu
+    $sql_dangky = "INSERT INTO dangky(tenkhachhang, email, dienthoai, matkhau, diachi) 
+                   VALUES ('$ten', '$email', '$dienthoai', '$matkhau', '$diachi')";
+    $query_dangky = mysqli_query($conn, $sql_dangky);
+    if ($query_dangky) {
         $_SESSION['dangky'] = $ten;
         header('location:index.php?quanly=giohang');
     }
-    }
+}
 ?>
 
 <div class="container-fluid bg-secondary mb-5">
@@ -62,7 +69,23 @@ session_start();
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="diachi">Địa chỉ</label>
+                                    <label class="form-label" for="tinh_thanhpho">Tỉnh/Thành phố</label>
+                                    <select name="tinh_thanhpho" id="city" class="form-control form-control-lg"
+                                        required></select>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="huyen">Huyện</label>
+                                    <select name="huyen" id="district" class="form-control form-control-lg" required></select>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="xa">Xã</label>
+                                    <select name="xa" id="ward" class="form-control form-control-lg" required></select>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="diachi">Ấp, Khu Vực</label>
                                     <input type="text" name="diachi" class="form-control form-control-lg" required />
                                 </div>
 
@@ -83,3 +106,62 @@ session_start();
         </div>
     </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+    const host = "https://provinces.open-api.vn/api/";
+var callAPI = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data, "city");
+        });
+}
+callAPI('https://provinces.open-api.vn/api/?depth=2');
+var callApiDistrict = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.districts, "district");
+        });
+}
+var callApiWard = (api) => {
+    return axios.get(api)
+        .then((response) => {
+            renderData(response.data.wards, "ward");
+        });
+}
+
+var renderData = (array, select) => {
+    let row = ' <option disable value="">Chọn</option>';
+    array.forEach(element => {
+        row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+    });
+    document.querySelector("#" + select).innerHTML = row
+}
+
+$("#city").change(() => {
+    callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+    printResult();
+});
+$("#district").change(() => {
+    callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+    printResult();
+});
+$("#ward").change(() => {
+    printResult();
+})
+
+var printResult = () => {
+    if ($("#district").find(':selected').data('id') != "" && $("#city").find(':selected').data('id') != "" &&
+        $("#ward").find(':selected').data('id') != "") {
+        let result = $("#city option:selected").text() +
+            " | " + $("#district option:selected").text() + " | " +
+            $("#ward option:selected").text();
+        $("#result").text(result)
+    }
+
+}
+	</script>
