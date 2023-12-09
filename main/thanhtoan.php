@@ -1,5 +1,6 @@
 <?php
     include('../admin/connect/conn.php');
+    include('../mail/sendmail.php');
     session_start();
 
     $id_dangky = $_SESSION['id_dangky'];
