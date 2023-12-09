@@ -8,6 +8,7 @@
         if($result && mysqli_num_rows($result) > 0){
             $row_dangnhap = mysqli_fetch_array($result);
             $_SESSION['dangky'] = $row_dangnhap['tenkhachhang'];
+            $_SESSION['email'] = $row_dangnhap['email'];
             $_SESSION['id_dangky'] = $row_dangnhap['id_dangky'];
             /* header("location:index.php?quanly=giohang"); */
             echo '<script>location.href="index.php?quanly=giohang"</script>';

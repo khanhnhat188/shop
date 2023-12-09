@@ -20,6 +20,7 @@ if (isset($_POST['dangky'])) {
     $query_dangky = mysqli_query($conn, $sql_dangky);
     if ($query_dangky) {
         $_SESSION['dangky'] = $ten;
+        $_SESSION['email'] = $email;
         $_SESSION['id_dangky'] = mysqli_insert_id($conn);
         echo '<script>location.href="index.php?quanly=giohang"</script>';
     }
