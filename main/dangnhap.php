@@ -8,6 +8,7 @@
         if($result && mysqli_num_rows($result) > 0){
             $row_dangnhap = mysqli_fetch_array($result);
             $_SESSION['dangky'] = $row_dangnhap['tenkhachhang'];
+            $_SESSION['id_dangky'] = $row_dangnhap['id_dangky'];
             /* header("location:index.php?quanly=giohang"); */
             echo '<script>location.href="index.php?quanly=giohang"</script>';
             exit(); // Kết thúc kịch bản sau khi chuyển hướng

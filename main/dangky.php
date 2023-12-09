@@ -20,7 +20,8 @@ if (isset($_POST['dangky'])) {
     $query_dangky = mysqli_query($conn, $sql_dangky);
     if ($query_dangky) {
         $_SESSION['dangky'] = $ten;
-        sprintf('<script>location.href="index.php?quanly=giohang"</script>');
+        $_SESSION['id_dangky'] = mysqli_insert_id($conn);
+        echo '<script>location.href="index.php?quanly=giohang"</script>';
     }
 }
 ?>
@@ -48,51 +49,47 @@ if (isset($_POST['dangky'])) {
                             <form method="POST" action="">
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="ten">Họ và tên</label>
-                                    <input type="text" name="ten" class="form-control form-control-lg" required />
+                                    <input type="text" name="ten" class="form-control form-control-lg" placeholder="Họ tên" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="email">Email</label>
-                                    <input type="email" name="email" class="form-control form-control-lg" required />
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="matkhau">Mật khẩu</label>
-                                    <input type="password" name="matkhau" class="form-control form-control-lg"
-                                        required />
+                                    <input type="password" name="matkhau" class="form-control form-control-lg" placeholder="Mật khẩu" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="dienthoai">Điện thoại</label>
-                                    <input type="text" name="dienthoai" class="form-control form-control-lg" required />
+                                    <input type="text" name="dienthoai" class="form-control form-control-lg" placeholder="Điện thoại" required />
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="tinh_thanhpho">Tỉnh/Thành phố</label>
-                                    <select name="tinh_thanhpho" id="city" class="form-control form-control-lg"
-                                        required></select>
+                                    <select name="tinh_thanhpho" id="city" class="form-control form-control-lg" placeholder="Tỉnh, Thành phố" required></select>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="huyen">Huyện</label>
-                                    <select name="huyen" id="district" class="form-control form-control-lg"
-                                        required></select>
+                                    <select name="huyen" id="district" class="form-control form-control-lg" placeholder="Huyện" required></select>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="xa">Xã</label>
-                                    <select name="xa" id="ward" class="form-control form-control-lg" required></select>
+                                    <select name="xa" id="ward" class="form-control form-control-lg" placeholder="Xã" required></select>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="diachi">Ấp, Khu Vực</label>
-                                    <input type="text" name="diachi" class="form-control form-control-lg" required />
+                                    <input type="text" name="diachi" class="form-control form-control-lg" placeholder="Khu vực, ấp" required />
                                 </div>
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" name="dangky"
-                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Đăng
-                                        ký</button>
+                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Đăng ký</button>
                                 </div>
 
                                 <p class="text-center text-muted mt-5 mb-0">Đăng nhập nếu đã có tài khoản <a

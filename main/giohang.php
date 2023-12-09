@@ -13,6 +13,7 @@
 <div class="container-fluid">
 <p class="m-2"><?php if (isset($_SESSION['dangky'])) {
     echo "Xin chào ".$_SESSION['dangky'];
+    echo $_SESSION['id_dangky'];
 } ?></p>
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
@@ -103,7 +104,7 @@
                     <?php
                         if (isset($_SESSION['dangky'])) {
                     ?>
-                    <button class="btn btn-block btn-primary my-3 py-3">Thanh toán</button>
+                    <a href="./main/thanhtoan.php" class="btn btn-block btn-primary my-3 py-3">Thanh toán</a>
                     <?php
                         }else {
                     ?>
