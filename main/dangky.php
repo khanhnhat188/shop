@@ -1,12 +1,11 @@
+
 <?php
-session_start();
-// Kiểm tra nếu có dữ liệu được gửi đi từ form
 if (isset($_POST['dangky'])) {
     // Lấy dữ liệu từ form
     $ten = $_POST['ten'];
     $email = $_POST['email'];
     $dienthoai = $_POST['dienthoai'];
-    $matkhau = password_hash($_POST['matkhau'], PASSWORD_DEFAULT);
+    $matkhau = md5($_POST['matkhau']);
     $ap = $_POST['diachi'];
     // Lấy giá trị từ form
     $tinhThanhPho = $_POST['tinh_thanhpho'];
@@ -21,14 +20,14 @@ if (isset($_POST['dangky'])) {
     $query_dangky = mysqli_query($conn, $sql_dangky);
     if ($query_dangky) {
         $_SESSION['dangky'] = $ten;
-        header('location:index.php?quanly=giohang');
+        sprintf('<script>location.href="index.php?quanly=giohang"</script>');
     }
 }
 ?>
 
 <div class="container-fluid bg-secondary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Dang ky</h1>
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Đăng ký</h1>
         <div class="d-inline-flex">
             <p class="m-0"><a href="">Home</a></p>
             <p class="m-0 px-2">-</p>
@@ -76,7 +75,8 @@ if (isset($_POST['dangky'])) {
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="huyen">Huyện</label>
-                                    <select name="huyen" id="district" class="form-control form-control-lg" required></select>
+                                    <select name="huyen" id="district" class="form-control form-control-lg"
+                                        required></select>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -95,8 +95,9 @@ if (isset($_POST['dangky'])) {
                                         ký</button>
                                 </div>
 
-                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#"
-                                        class="fw-bold text-body"><u>Login here</u></a></p>
+                                <p class="text-center text-muted mt-5 mb-0">Đăng nhập nếu đã có tài khoản <a
+                                        href="index.php?quanly=dangnhap" class="fw-bold text-body"><u>Đăng nhập</u></a>
+                                </p>
                             </form>
 
                         </div>
@@ -111,9 +112,9 @@ if (isset($_POST['dangky'])) {
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script>
-    const host = "https://provinces.open-api.vn/api/";
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+const host = "https://provinces.open-api.vn/api/";
 var callAPI = (api) => {
     return axios.get(api)
         .then((response) => {
@@ -164,4 +165,4 @@ var printResult = () => {
     }
 
 }
-	</script>
+</script>

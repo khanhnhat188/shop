@@ -19,6 +19,7 @@
 <body>
     <div class="wrapper">
         <?php
+            session_start();
             include "page/header.php";
             include "page/menu.php";
             include "page/main.php";
