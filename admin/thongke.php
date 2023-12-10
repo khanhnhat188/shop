@@ -14,7 +14,7 @@ while($row = mysqli_fetch_array($query)){
         'date' => $row['ngaydat'],
         'order' => $row['donhang'],
         'sales' => $row['doanhthu'],
-        'quantity' => $row['soluong']
+        'quantity' => $row['soluongban']
     );
 }
 echo json_encode($char_data);
