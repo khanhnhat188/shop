@@ -1,10 +1,7 @@
 <?php
-require './carbon/autoload.php';
-
+require './carbon/vendor/autoload.php';
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
 
-printf("Now: %s", Carbon::now());
-
-printf("1 day: %s", CarbonInterval::day()->forHumans());
+$now = Carbon::now();
+echo $now->toDateTimeString();
 ?>
