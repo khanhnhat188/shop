@@ -20,6 +20,10 @@
             include 'blocks/qlsanpham/lietke.php';
         }elseif($tam == 'qlsanpham' && $query == 'sua'){
             include 'blocks/qlsanpham/suasp.php';
+        }elseif($tam == 'qldonhang' && $query == 'lietke'){
+            include 'blocks/qldonhang/lietke.php';
+        }elseif($tam == 'donhang' && $query == 'xemdonhang'){
+            include 'blocks/qldonhang/xemdonhang.php';
         }else{
             include 'blocks/dashboard.php';
         }

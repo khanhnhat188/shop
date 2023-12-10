@@ -23,7 +23,7 @@ class Mailer{
             $mail->Port = 465;                                    // TCP port to connect to
     
             // Recipients
-            $mail->setFrom('contact@khanhnhat.id.vn', 'Mailer');
+            $mail->setFrom('contact@khanhnhat.id.vn', 'Eshopper');
             $mail->addAddress($email);                            // Add a recipient
     
             // Content

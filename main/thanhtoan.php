@@ -11,7 +11,7 @@
         foreach ($_SESSION['cart'] as $key => $value) {
             $id_sanpham = $value['id'];
             $soluong = $value['soluong'];
-            $insert_chitiet = "INSERT INTO chitiethoadon (madonhang, id_sanpham, soluong) VALUES ('$mahoadon', '$id_sanpham', '$soluong')";
+            $insert_chitiet = "INSERT INTO chitiethoadon (madonhang, id_sanpham, soluongmua) VALUES ('$mahoadon', '$id_sanpham', '$soluong')";
             $query_chitiet = mysqli_query($conn, $insert_chitiet);
         }
     $tieu_de = "Đơn hàng của bạn đã được tiếp nhận";
@@ -20,6 +20,8 @@
     foreach ($_SESSION['cart'] as $key => $value) {
         $noi_dung .= $value['tensanpham'] . " - " . $value['soluong'] . " cái<br>";
     }
+
+    
     $email = $_SESSION['email'];
     $mail = new Mailer();
     $mail->maildathang($tieu_de, $noi_dung, $email);
