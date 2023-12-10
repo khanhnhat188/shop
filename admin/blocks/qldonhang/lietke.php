@@ -14,6 +14,7 @@
     <th>Email</th>
     <th>Ngày đặt</th>
     <th>Trạng thái</th>
+    <th>Ngày đặt</th>
     <th>Quản lý</th>
   </tr>
 <?php
@@ -38,6 +39,7 @@ while($row = mysqli_fetch_array($query_lietke)){
             }
         ?>
     </td>
+    <td><?php echo $row['ngaydat'] ?></td>
     <td>
         <a href="index.php?action=donhang&query=xemdonhang&code=<?php echo $row['madonhang'] ?>">Xem</a>
     </td>
