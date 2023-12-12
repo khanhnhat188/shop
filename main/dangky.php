@@ -38,8 +38,7 @@ if (isset($_POST['dangky'])) {
     </div>
 </div>
 
-<section class="bg-image"
-    style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+<section class="bg-image">
     <div class="mask d-flex align-items-center gradient-custom-3">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center">

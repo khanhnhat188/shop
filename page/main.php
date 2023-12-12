@@ -1,5 +1,6 @@
 <div id=main>
-    <div class="maincontent"><!--Thân trang-->
+    <div class="maincontent">
+        <!--Thân trang-->
         <?php
         if(isset($_GET['quanly'])){
             $tam=$_GET['quanly'];
@@ -22,12 +23,15 @@
             include("main/thanhtoan.php");
         }elseif($tam=='timkiem'){
             include("main/search.php");
+        }elseif($tam=='vanchuyen'){
+            include("main/vanchuyen.php");
+        }elseif($tam=='thongitnthanhtoan'){
+            include("main/thongtinthanhtoan.php");
+        }elseif($tam=='donhangdadat'){
+            include("main/donhangdadat.php");
         }else{
             include("main/index.php");
         }
         ?>
     </div>
 </div>
-
-
-

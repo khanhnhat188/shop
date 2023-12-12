@@ -1,15 +1,40 @@
-<!-- Page Header Start -->
+<?php
+if (isset($_SESSION['dangky'])) {
+    $id_dangky = $_SESSION['id_dangky'];
+    
+
+    // Chạy câu truy vấn SQL
+    $sql_khachhang = "SELECT * FROM dangky WHERE id_dangky = ?";
+    $stmt = $conn->prepare($sql_khachhang);
+    $stmt->bind_param("i", $id_dangky);
+    $stmt->execute();
+
+    // Lấy kết quả
+    $result = $stmt->get_result();
+    
+    // Kiểm tra xem có dữ liệu hay không
+    if ($result->num_rows > 0) {
+        // Lấy dữ liệu từ kết quả
+        $row_khachhang = $result->fetch_assoc();
+        // Thêm các trường khác tương tự...
+    } else {
+        echo "Không có dữ liệu cho id_dangky = $id_dangky";
+    }
+
+}
+
+?>
 <div class="container-fluid bg-secondary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Thông tin thanh toán</h1>
         <div class="d-inline-flex">
             <p class="m-0"><a href="">Home</a></p>
             <p class="m-0 px-2">-</p>
-            <p class="m-0">Shopping Cart</p>
+            <p class="m-0">Thông tin thanh toán</p>
         </div>
     </div>
 </div>
-
+<form action="main/xulythanhtoan.php" method="post">
     <!-- Page Header End -->
     <div class="container-fluid">
         <p class="m-2"><?php if (isset($_SESSION['dangky'])) {
@@ -74,7 +99,6 @@
             </div>
             <div class="col-lg-4">
                 <!-- Kiểm tra nếu có sản phẩm trong giỏ hàng thì hiển thị summary, ngược lại hiển thị 0 -->
-                <?php if (!empty($_SESSION['cart'])) : ?>
                 <form class="mb-5" action="">
                     <div class="input-group">
                         <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
@@ -85,36 +109,31 @@
                 </form>
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Thông tin</h4>
+                        <h4 class="font-weight-semi-bold m-0">Thông tin khách hàng</h4>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Tổng cộng</h6>
-                            <h6 class="font-weight-medium"><?php echo number_format($tongtien); ?></h6>
+                            <h6 class="font-weight-medium">Tên khách hàng</h6>
+                            <h6 class="font-weight-medium"><?php echo $row_khachhang['tenkhachhang']; ?></h6>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Phí vận chuyển</h6>
-                            <h6 class="font-weight-medium"><?php ?></h6>
+                            <h6 class="font-weight-medium">Số điện thoại</h6>
+                            <h6 class="font-weight-medium"><?php echo $row_khachhang['dienthoai']; ?></h6>
                         </div>
-                        <div class="card-footer border-secondary bg-transparent">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5 class="font-weight-bold">Total</h5>
-                                <h5 class="font-weight-bold"><?php echo number_format($tongtien); ?></h5>
-                            </div>
-                            <?php
-                        if (isset($_SESSION['dangky'])) {
-                    ?>
-                            <a href="./index.php?quanly=thongitnthanhtoan" class="btn btn-block btn-primary my-3 py-3">Thanh toán</a>
-                            <?php
-                        }else {
-                    ?>
-                            <a href="./index.php?quanly=dangky">Đăng ký để thanh toán</a>
-                            <?php
-                        }
-                    ?>
+                        <div class="mt-1">
+                            <h6 class="font-weight-medium">Địa chỉ:</h6>
+                            <h6 class="font-weight-medium"><?php echo $row_khachhang['diachi']; ?></h6>
+                        </div>
+                        <div class="mt-1">
+                            <h6 for="" class="font-weight-medium">Hình thức thanh toán</h6>
+                            <select class="form-control" id="" name="payment">
+                                <option value="cash">Tiền mặt</option>
+                                <option value="vnpay">VNPAY</option>
+                            </select>
+
                         </div>
                     </div>
-                    <?php else : ?>
+
                     <div class="card border-secondary mb-5">
                         <div class="card-header bg-secondary border-0">
                             <h4 class="font-weight-semi-bold m-0">Thông tin</h4>
@@ -122,25 +141,24 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-3 pt-1">
                                 <h6 class="font-weight-medium">Tổng cộng</h6>
-                                <h6 class="font-weight-medium">0.00</h6>
+                                <h6 class="font-weight-medium"><?php echo number_format($tongtien); ?></h6>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Phí vận chuyển</h6>
-                                <h6 class="font-weight-medium">0.00</h6>
+                                <h6 class="font-weight-medium"><?php ?></h6>
                             </div>
-                        </div>
-                        <div class="card-footer border-secondary bg-transparent">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5 class="font-weight-bold">Total</h5>
-                                <h5 class="font-weight-bold">0.00</h5>
+                            <div class="card-footer border-secondary bg-transparent">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5 class="font-weight-bold">Total</h5>
+                                    <h5 class="font-weight-bold"><?php echo number_format($tongtien); ?></h5>
+                                </div>
+                                <button class="btn btn-block btn-primary my-3 py-3" type="submit" name="submit">Thanh
+                                    toán</button>
+
                             </div>
-                            <button class="btn btn-block btn-primary my-3 py-3" disabled>Thanh toán</button>
                         </div>
                     </div>
-                    <?php endif; ?>
-                    <!-- Kết thúc kiểm tra -->
-
                 </div>
             </div>
         </div>
-        <!-- Cart End -->
+</form>
