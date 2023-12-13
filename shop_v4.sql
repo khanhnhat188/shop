@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th12 07, 2023 lúc 02:50 AM
+-- Thời gian đã tạo: Th12 13, 2023 lúc 04:30 AM
 -- Phiên bản máy phục vụ: 8.0.31
 -- Phiên bản PHP: 8.0.26
 
@@ -52,13 +52,55 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`) VALUES
 DROP TABLE IF EXISTS `chitiethoadon`;
 CREATE TABLE IF NOT EXISTS `chitiethoadon` (
   `id_chitiet` int NOT NULL AUTO_INCREMENT,
+  `madonhang` varchar(10) NOT NULL,
   `id_sanpham` int NOT NULL,
-  `soluong` int NOT NULL,
-  `gia` varchar(100) NOT NULL,
-  `giamgia` varchar(100) NOT NULL,
+  `soluongmua` int NOT NULL,
   PRIMARY KEY (`id_chitiet`),
   KEY `fk_group` (`id_sanpham`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`id_chitiet`, `madonhang`, `id_sanpham`, `soluongmua`) VALUES
+(1, '5623', 91, 4),
+(2, '3371', 274, 2),
+(3, '9034', 273, 2),
+(4, '1082', 91, 1),
+(5, '8262', 91, 1),
+(6, '4382', 274, 1),
+(7, '6228', 91, 1),
+(8, '7129', 91, 1),
+(9, '0708', 90, 1),
+(10, '8237', 90, 1),
+(11, '8237', 91, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dangky`
+--
+
+DROP TABLE IF EXISTS `dangky`;
+CREATE TABLE IF NOT EXISTS `dangky` (
+  `id_dangky` int NOT NULL AUTO_INCREMENT,
+  `tenkhachhang` varchar(200) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `matkhau` varchar(100) NOT NULL,
+  `dienthoai` varchar(11) NOT NULL,
+  `diachi` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_dangky`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Đang đổ dữ liệu cho bảng `dangky`
+--
+
+INSERT INTO `dangky` (`id_dangky`, `tenkhachhang`, `email`, `matkhau`, `dienthoai`, `diachi`) VALUES
+(1, 'Khánh Nhật', 'teamka71@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '0358854764', 'KV1, Phường Ngã Bảy, Thành phố Ngã Bảy, Tỉnh Hậu Giang'),
+(9, 'Demo', 'demo@a.vn', 'e10adc3949ba59abbe56e057f20f883e', '0123456789', 'BAC, Phường Châu Sơn, Thành phố Sông Công, Tỉnh Thái Nguyên'),
+(8, 'Demo', 'demo@a.vn', 'e10adc3949ba59abbe56e057f20f883e', '0123456789', 'BAC, Phường Châu Sơn, Thành phố Sông Công, Tỉnh Thái Nguyên');
 
 -- --------------------------------------------------------
 
@@ -86,15 +128,43 @@ INSERT INTO `danhmuc` (`id_danhmuc`, `tendanhmuc`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `hoadon`
+-- Cấu trúc bảng cho bảng `donhang`
 --
 
-DROP TABLE IF EXISTS `hoadon`;
-CREATE TABLE IF NOT EXISTS `hoadon` (
-  `id_hoadon` int NOT NULL AUTO_INCREMENT,
-  `tenhoadon` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_hoadon`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+DROP TABLE IF EXISTS `donhang`;
+CREATE TABLE IF NOT EXISTS `donhang` (
+  `id_donhang` int NOT NULL AUTO_INCREMENT,
+  `id_dangky` int NOT NULL,
+  `madonhang` varchar(10) NOT NULL,
+  `trangthai` int NOT NULL,
+  `ngaydat` varchar(50) NOT NULL,
+  `hinhthucthanhtoan` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_donhang`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Đang đổ dữ liệu cho bảng `donhang`
+--
+
+INSERT INTO `donhang` (`id_donhang`, `id_dangky`, `madonhang`, `trangthai`, `ngaydat`, `hinhthucthanhtoan`) VALUES
+(1, 9, '1711', 0, '', '0'),
+(2, 9, '1073', 0, '', '0'),
+(3, 9, '3980', 0, '', '0'),
+(4, 9, '1106', 0, '', '0'),
+(5, 9, '1821', 0, '', '0'),
+(6, 9, '3110', 0, '', '0'),
+(7, 9, '9871', 0, '', '0'),
+(8, 9, '5623', 0, '', '0'),
+(9, 1, '3371', 0, '', '0'),
+(10, 1, '9034', 0, '', '0'),
+(11, 1, '1082', 1, '2023-12-10 21:19:07', '0'),
+(12, 1, '8262', 1, '2023-12-12 23:01:30', ''),
+(13, 1, '4382', 1, '2023-12-12 23:07:27', ''),
+(14, 1, '6228', 1, '2023-12-12 23:15:33', 'cash'),
+(15, 1, '7129', 1, '2023-12-12 23:15:52', 'vnpay'),
+(16, 1, '3160', 1, '2023-12-13 10:22:01', 'cash'),
+(17, 1, '0708', 1, '2023-12-13 11:17:44', 'vnpay'),
+(18, 1, '8237', 1, '2023-12-13 11:26:59', 'vnpay');
 
 -- --------------------------------------------------------
 
@@ -243,6 +313,65 @@ INSERT INTO `sanpham` (`id_sanpham`, `tensanpham`, `giasp`, `soluong`, `hinhanh`
 (274, 'Body Mist Nam Bath And Body Work 104g - Body Spray Nam - Body Mist Nam Chính Hãng', '259000', 10, 'https://salt.tikicdn.com/ts/product/2c/c0/89/6b557c28edb2e978f23defe2c3e1b8d8.jpg', 'Body Mist Nam Bath And Body Work 104g  Body Spray Nam - Body Mist Nam Chính Hãng-Thương hiệu: Bath and Body Works-Xuất xứ: USA-Dung tích: 104GThương hiệu Bath & Body Works đến từ Mỹ ra đời vào...', '<p style=\"text-align:center;\"><strong>Body Mist Nam Bath And Body Work 104g <br /> Body Spray Nam - Body Mist Nam Chính Hãng<br /><br /></strong></p>\n<p style=\"text-align:center;\"><strong>-Thương hiệu: Bath and Body Works</strong></p>\n<p style=\"text-align:center;\"><strong>-Xuất xứ: USA</strong></p>\n<p style=\"text-align:center;\"><strong>-Dung tích: 104G</strong></p>\n<p style=\"text-align:center;\"><strong>Thương hiệu Bath &amp; Body Works đến từ Mỹ ra đời vào năm 1990 là một thương hiệu mỹ phẩm nổi tiếng đã tạo được dấu ấn sâu sắc trong lòng người tiêu dùng với những mùi hương độc đáo, đa dạng và dễ chịu. Các sản phẩm của Bath &amp; Body Works khá đa dạng, hãng đem đến cho khách hàng nhiều sự lựa chọn từ các sản phẩm dành cho gia đình như sữa tắm, xịt thơm, dưỡng thể đến những sản phẩm tạo mùi hương như nến thơm.</strong></p>\n<p style=\"text-align:center;\"><strong>Trong hơn 30 năm hoạt động và phát triển, Bath &amp; Body Works đã cho ra đời rất nhiều mùi hương dễ chịu giúp đem lại nụ cười, sự thư giãn và thoải mái cho khách hàng khi sử dụng.</strong></p>\n<p style=\"text-align:center;\"><strong>Với mục tiêu dùng hương thơm để làm cho thế giới trở nên tươi sáng và hạnh phúc hơn, các sản phẩm của Bath &amp; Body Works với chất lượng tốt và giá cả phải chăng đã được khách hàng đánh giá cao về độ dưỡng ẩm và mùi hương đa dạng.</strong></p>\n<p style=\"text-align:center;\"><strong>Bên cạnh đó, Bath &amp; Body Works còn mong muốn các sản phẩm của mình sẽ giúp cải thiện được đời sống vật chất lẫn tinh thần của khách hàng, vì vậy hãng đã tạo ra các sản phẩm chăm sóc cá nhân có độ an toàn cao, lành tính và không gây kích ứng da. Các sản phẩm của Bath and Body Works đều phải trải qua quy trình thử nghiệm kĩ càng và nghiêm ngặt trước khi được tung ra thị trường.</strong></p>\n<p style=\"text-align:center;\"><strong><br /><br /><img src=\"https://salt.tikicdn.com/ts/tmp/2c/c0/89/506df62563a7f2035e4c3589a3dd1837.jpg\" alt=\"\" width=\"750\" height=\"744\" /><br /><br /></strong></p>\n<p style=\"text-align:center;\"><strong>-Body Mist Nam Bath and Body Works là một loại nước hoa dạng sương nhẹ được thiết kế đặc biệt cho nam giới. Sản phẩm này có mùi hương nam tính và phong cách, mang lại cảm giác tươi mát và tự tin suốt cả ngày.</strong></p>\n<p style=\"text-align:center;\"><strong>-Body Mist Nam Bath and Body Works có nhiều lựa chọn về mùi hương, từ các loại hương thảo dược như gỗ đàn hương, hoắc hương và bạch đậu khấu cho đến các loại hương trái cây tươi mát như cam bergamot và quýt xanh. Mỗi sản phẩm đều được pha trộn tỉ mỉ để tạo ra sự kết hợp hoàn hảo giữa các thành phần.</strong></p>\n<p style=\"text-align:center;\"><strong>-Sử dụng Body Mist Nam Bath and Body Works rất dễ dàng. Bạn chỉ cần xịt sản phẩm lên da sau khi tắm hoặc khi bạn muốn thêm vào lớp nước hoa hiện có để gia tăng hiệu ứng lâu dài. Nước hoa này không chỉ mang lại mùi thơm quyến rũ, mà còn giúp làm dịu da và duy trì độ ẩm.<br /><br /><img src=\"https://salt.tikicdn.com/ts/tmp/77/1d/9d/2feeae20a81a0f9bf0a67dd43f7257a0.jpg\" alt=\"\" width=\"750\" height=\"740\" /><img src=\"https://salt.tikicdn.com/ts/tmp/09/c6/52/71c415ebac22124a9d5fd0137437e67a.jpg\" alt=\"\" width=\"750\" height=\"741\" /><img src=\"https://salt.tikicdn.com/ts/tmp/3c/43/64/3e19aa082a707ce44f0738fc551554a0.jpg\" alt=\"\" width=\"750\" height=\"746\" /><img src=\"https://salt.tikicdn.com/ts/tmp/cb/e9/b3/9b9b3200b482fb86650aca7993d96b51.jpg\" alt=\"\" width=\"750\" height=\"740\" /><img src=\"https://salt.tikicdn.com/ts/tmp/b2/c9/ae/9431db1dc3e0678b10750a50aadc7a13.jpg\" alt=\"\" width=\"750\" height=\"743\" /><img src=\"https://salt.tikicdn.com/ts/tmp/6f/74/41/a94d19cc66684917a016033a2786b3f1.jpg\" alt=\"\" width=\"750\" height=\"734\" /><img src=\"https://salt.tikicdn.com/ts/tmp/b6/09/67/99237e4fe04c95782dc49639c464b490.jpg\" alt=\"\" width=\"750\" height=\"745\" /><img src=\"https://salt.tikicdn.com/ts/tmp/a1/49/f3/83db73ff2387fd1d86e81885d0c94632.jpg\" alt=\"\" width=\"750\" height=\"740\" /><img src=\"https://salt.tikicdn.com/ts/tmp/b2/02/48/ccd6ede6a8a25df3bc300d14ab846a60.jpg\" alt=\"\" width=\"750\" height=\"746\" /><img src=\"https://salt.tikicdn.com/ts/tmp/a7/50/cb/eb1fd9fdf7c76b5dd40d5fa1f5c3819c.jpg\" alt=\"\" width=\"750\" height=\"749\" /><img src=\"https://salt.tikicdn.com/ts/tmp/00/1e/fd/92ad6f56db6235bc05a927ebcc56a17b.jpg\" alt=\"\" width=\"750\" height=\"744\" /><img src=\"https://salt.tikicdn.com/ts/tmp/d2/44/43/547a2f407e4afff75869d16cb1b2ba52.jpg\" alt=\"\" width=\"750\" height=\"739\" /><img src=\"https://salt.tikicdn.com/ts/tmp/dc/21/09/950ee069eb6195e67e605bba5bdf58bb.jpg\" alt=\"\" width=\"750\" height=\"744\" /><img src=\"https://salt.tikicdn.com/ts/tmp/58/62/03/b1d8099948438fd941508f2c683d9458.jpg\" alt=\"\" width=\"750\" height=\"733\" /><br /><br /></strong></p>\n<p style=\"text-align:center;\"><strong>-Ngoài ra, Body Mist Nam Bath and Body Works cũng có thiết kế bao bì sang trọng và tiện lợi. Với chai xịt nhỏ gọn, bạn có thể dễ dàng mang theo bất cứ nơi nào và sử dụng khi cần thiết.</strong></p>\n<p style=\"text-align:center;\"><strong>-Body Mist Nam của Bath and Body Works là một lựa chọn tuyệt vời để tạo ra một hương thơm nam tính và tự tin. Với sự kết hợp hoàn hảo giữa các thành phần và thiết kế tiện lợi, sản phẩm này sẽ làm bạn tự tin và cuốn hút suốt cả ngày.</strong></p>\n<p style=\"text-align:center;\"><img src=\"https://salt.tikicdn.com/ts/tmp/c6/3d/d4/72b54bbff99882d3c5884e68375c32ca.jpg\" alt=\"\" width=\"750\" height=\"746\" /></p>\n<p style=\"text-align:center;\"><strong>#bathandbodyworks #bodymistbathandbodyworks #lotionbathandbodyworks #bathandbodyworksbodymist #bodymist #xitbodymist #xitthombodymist #bodymistnam #bodymistnamchinhhang #xitthombody #xitthomtoanthan #xitkhumui #xitkhumuinam #nuochoa #nuochoanam #xitthombody #xitbodymist #xitbodynam #xitthombodynam</strong></p>\n<p style=\"text-align:center;\"><strong> </strong></p><p>Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao từ nước ngoài có giá trị trên 1 triệu đồng).....</p>', 1, 3),
 (275, 'Nước hoa nữ thơm lâu, Charme So Sexy, mùi hương hoa hồng, tươi mát sảng khoái, lưu hương lâu, 20ml', '210000', 10, 'https://salt.tikicdn.com/ts/product/c6/e8/04/8e0ffa4d4548c62b431f9799adbc94b1.png', 'Nước hoa nữ thơm lâu, Charme So Sexy, mùi hương hoa hồng, tươi mát sảng khoái, lưu hương lâu, 20ml THÔNG TIN SẢN PHẨM Nước hoa nữ thơm lâu, Charme So Sexy - Thật quá khó để có thể dùng từ ngữ di...', '<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-1zjapjop69lv66\" alt=\"vn-11134208-23010-1zjapjop69lv66\" /></p>\n<p>Nước hoa nữ thơm lâu, Charme So Sexy, mùi hương hoa hồng, tươi mát sảng khoái, lưu hương lâu, 20ml</p>\n<p> </p>\n<p>THÔNG TIN SẢN PHẨM Nước hoa nữ thơm lâu, Charme So Sexy</p>\n<p> </p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-gio5bu0p69lv67\" alt=\"vn-11134208-23010-gio5bu0p69lv67\" /></p>\n<p>- Thật quá khó để có thể dùng từ ngữ diễn tả mùi hương với sự quyến rũ và thu hút tuyệt vời của Nước hoa nữ thơm lâu Charme So Sexy. Mang trong mình hương thơm mát dịu của lựu, yuzu cùng mùi hương đầy lãng mạn và gợi tình của mẫu đơn, mộc lan, sen, hoà quyện cùng hương thơm ấm áp của xạ hương và hổ phách. Tuy hương thơm dịu nhẹ thôi nhưng sự quyến rũ và lôi cuốn thì dai dẳng từ lúc xịt tới tận ngày hôm sau. Độ lưu hương và tỏa hương của Nước hoa nữ thơm lâu Charme So Sexy sẽ khiến cánh nam giới say mê và chìm đắm trước bất kỳ một cô gái nào mang hương thơm này.</p>\n<p>- Nước hoa nữ lưu hương lâu Charme So Sexy đem đến một khởi đầu khá tươi mát với hỗn hợp trái thanh yên và lưu đông lạnh. Tiếp đến, hoa mẫu đơn, hoa linh lan, hoa sen và trái mâm xôi dần được đưa vào cuộc chơi. Khi dần kết thúc, hỗn hợp gỗ mahoganu, hổ phách thực vật và xạ hương trắng cùng hòa quyện, mang tới những trải nghiệm đầy ấm áp và quyến rũ.</p>\n<p>Dung tích: 20ml</p>\n<p>- Nơi sản xuất: Việt Nam</p>\n<p>- Thương hiệu: Charme Perfume</p>\n<p> </p>\n<p>THÔNG TIN CHI TIẾT Nước hoa nữ hương hoa hồng, Charme So Sexy</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-5s9lj5kq69lvec\" alt=\"vn-11134208-23010-5s9lj5kq69lvec\" /></p>\n<p>Thương hiệu: Nước hoa Charme</p>\n<p>Loại: Nước hoa nữ quyến rũ</p>\n<p>Dung tích: 20ml</p>\n<p>Nồng độ: Eau De Parfum (EDP)</p>\n<p>Độ lưu hương: Lâu - 8 giờ đến 12 giờ</p>\n<p>Độ toả hương: Xa - Toả hương trong vòng bán kính 2 mét</p>\n<p>Thời điểm khuyên dùng: Ngày, Đêm, Thu, Đông, xuân, hạ</p>\n<p> </p>\n<p>MÙI HƯƠNG ĐẶC TRƯNG Nước hoa nữ lưu hương lâu Charme So Sexy</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-cr9ie3tq69lv5e\" alt=\"vn-11134208-23010-cr9ie3tq69lv5e\" /></p>\n<p>Mùi hương đặc trưng của Nước hoa nữ quyến rũ Charme So Sexy:</p>\n<p>- Hương đầu: Cam Yuzu, Lựu.</p>\n<p>- Hương giữa: Mẫu đơn, Hoa mộc lan, Sen.</p>\n<p>- Hương cuối: Xạ hương, Hổ phách.</p>\n<p>Nhóm hương nước hoa Charme thơm lâu: Hương Hoa cỏ Trái cây - Floral Fruity</p>\n<p> </p>\n<p>CÔNG DỤNG Nước hoa nữ thơm lâu, Charme So Sexy</p>\n<p>Độ lưu hương và tỏa hương của Nước hoa nữ thơm lâu Charme So Sexy sẽ khiến cánh nam giới say mê và chìm đắm trước bất kỳ một cô gái nào mang hương thơm này. Nước hoa nữ thơm lâu Charme So Sexy thích hợp dùng cho ban ngày, vào các mùa xuân hè nóng ẩm đầu năm để nước hoa có thể phát huy tác dụng tốt nhất.</p>\n<p>Chọn Nước hoa nữ lưu hương lâu Charme So Sexy là chọn một món quà thật ý nghĩa</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-cjab8d1q69lvde\" alt=\"vn-11134208-23010-cjab8d1q69lvde\" /></p>\n<p> </p>\n<p>HƯỚNG DẪN SỬ DỤNG Nước hoa nữ thơm lâu, Charme So Sexy</p>\n<p>- Hạn sử dụng: 3 năm kể từ ngày sản xuất.</p>\n<p>- Thời điểm khuyên dùng: Ngày, Đêm, Xuân, Hạ, Thu, Đông</p>\n<p>- Nên xịt Nước hoa nữ thơm lâu Charme So Sexy ở đâu? Tại các vị trí có mạch đập, dễ khiến mùi hương nước hoa lan ra tự nhiên. Điển hình là ở cổ tay, phần khuỷu tay phía bên trong, sau gáy, sau tai, đầu gối phần phía sau. Bên cạnh đó, bạn có thể xịt một chút nước hoa ở sau lưng, ngực, hay xịt thoảng qua mái tóc (hoặc xức lên tay rồi xoa lên tóc) để thêm phần thu hút.</p>\n<p>- Nên xịt Nước hoa nữ lưu hương lâu Charme So Sexy khi nào? Khi cơ thể sạch sẽ và có đủ độ ẩm. Các phần tử mùi hương dễ dàng bám chặt lên làn da được dưỡng ẩm đầy đủ. Vì thế, bạn có thể xịt nước hoa sau khi tắm vào buổi sáng. Nếu muốn dùng nước hoa vào một thời điểm bất kỳ trong ngày, hãy thoa kem dưỡng ẩm trước khi xức.</p>\n<p>- Cách xịt nước hoa Charme lưu hương lâu như thế nào? Bạn cầm chai nước hoa thẳng đứng, nhấn nút xịt vào các vị trí mong muốn. Sau khi xịt nước hoa lên một vị trí trong cơ thể, bạn dùng tay chấm nhẹ, vỗ nhẹ lên da. Như vậy, mùi hương sẽ quyện vào da chặt hơn, đồng thời giữ được mùi hương gốc của sản phẩm. Tránh xoa mạnh có thể khiến hương thơm bị biến mùi.</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-sdxbroxdz9lve4\" alt=\"vn-11134208-23010-sdxbroxdz9lve4\" /></p>\n<p> </p>\n<p> </p>\n<p>HƯỚNG DẪN BẢO QUẢN</p>\n<p>Để Nước hoa chính hãng ở nơi khô ráo, thoáng mát. Tránh tiếp xúc trực tiếp với mắt và tránh xa tầm tay trẻ em.</p>\n<p> </p>\n<p>THÔNG TIN THƯƠNG HIỆU</p>\n<p>- Charme Perfume là một trong những thương hiệu nước hoa Pháp đáng tin cậy, nổi tiếng trên thế giới được nhiều người dùng ưa chuộng, đón nhận và đánh giá là sản phẩm chất lượng tốt, phù hợp với tiêu chí của người tiêu dùng.</p>\n<p>- Charme Perfume phấn đấu trở thành thương hiệu cao cấp tại Việt Nam về sản phẩm nước hoa, thực hiện sứ mệnh “Mang đến sản phẩm tốt đến với người tiêu dùng và giúp đỡ những người kinh doanh Charme ổn định tài chính.</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-kn8vq5gdo8lva7\" alt=\"vn-11134208-23010-kn8vq5gdo8lva7\" /></p>\n<p> </p>\n<p>CHÍNH SÁCH BẢO HÀNH VÀ ĐỔI TRẢ</p>\n<p>1. Charme Perfume cam kết đến người tiêu dùng</p>\n<p>- Giấy phép lưu hành, chất lượng sản phẩm được Bộ y Tế kiểm nghiệm.</p>\n<p>- Tem chống hàng giả của bộ Công An.</p>\n<p>- Hương liệu cao cấp được nhập khẩu chính ngạch từ Pháp.</p>\n<p>- Công nghệ và dây chuyền sản xuất đạt tiêu chuẩn Châu Âu.</p>\n<p>2. Điều kiện đổi trả:</p>\n<p>- Đổi trả sản phẩm trong vòng 7 ngày kể từ ngày nhận hàng</p>\n<p>- Shop giao hàng không đúng sản phẩm</p>\n<p>- Giao không đúng số lượng hàng đã đặt, sản phẩm chưa qua sử dụng</p>\n<p><img src=\"https://cf.shopee.vn/file/vn-11134208-23010-wq2wyw9co8lv27\" alt=\"vn-11134208-23010-wq2wyw9co8lv27\" /></p>\n<p> </p>\n<p> </p>\n<p>#charmeperfume #nuochoacharmeperfume #nuochoa #dauthom #nuochoanu #nuochoachonu #nuochoachinhhang #nuochoacaocap #nuochoaphap #nuochoathienhien #nuochoathomxa #nuochoathomnhe #nuochoaxin #nuochoathombody #nuochoaluuhuong #nuochoanamnu #dauthomcharme #nuochoaxit</p><p>Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao từ nước ngoài có giá trị trên 1 triệu đồng).....</p>', 1, 3),
 (276, 'Nước hoa nữ Morra No.94 (Camel Vanilla 11) nguyên liệu nhập Pháp hương hoa cỏ mùi hương mộc mạc, tao nhã, ấn tượng lưu hương thơm lâu - dạng xịt', '210000', 10, 'https://salt.tikicdn.com/ts/product/e7/0c/fc/9a2f057cd346db20f88a22a5ea582996.png', 'No.94 (Camel Vanilla 11)    Vani từ lâu đời đã được xem là một trong những gia vị đắt giá nhất thế giới, loại quả này mang trong mình mùi hương thanh ngọt và tinh tế. Vani thường được gọi tên trong c...', '<p><strong>No.94 (Camel Vanilla 11)</strong></p>\n<p><span style=\"font-weight:400;\">    Vani từ lâu đời đã được xem là một trong những gia vị đắt giá nhất thế giới, loại quả này mang trong mình mùi hương thanh ngọt và tinh tế. Vani thường được gọi tên trong các biện pháp trị liệu bằng hương thơm, trong ẩm thực và cả nước hoa. </span></p>\n<p><span style=\"font-weight:400;\">    Tầng hương cuối của No.94 (Camel Vanilla 11), vani hòa cùng các nốt hương hoa mang đến sự ấn tượng từ nét dịu dàng và mộc mạc hiếm có. Nếu bạn thấy thấp thoáng đâu đó tính cách của mình trong No.94, hãy đến Morra để cùng trải nghiệm.</span></p>\n<p><img src=\"https://salt.tikicdn.com/ts/tmp/e7/0c/fc/73fb8307266dbe877726588f1170f4ec.png\" alt=\"\" width=\"750\" height=\"750\" /></p>\n<p><span style=\"font-weight:400;\">1. NOTE HƯƠNG CHỦ ĐẠO: </span></p>\n<ul><li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Hương đầu: Quả quýt hồng (Mandarin Orange)</span></li>\n<li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Hương giữa: Hoa hồng (Rose), Hoa nhài (Jasmine)</span></li>\n<li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Hương cuối: Vani (Vanilla), Xạ hương (Musk)</span></li>\n</ul><p><span style=\"font-weight:400;\"><img src=\"https://salt.tikicdn.com/ts/tmp/4f/93/36/f6b130473759551520bbbf29684ea452.png\" alt=\"\" width=\"750\" height=\"750\" /></span></p>\n<p><img style=\"margin-left:auto;margin-right:auto;\" src=\"https://salt.tikicdn.com/ts/tmp/d7/12/4c/247d79cc308fe1c37b95530433544f8d.png\" alt=\"\" width=\"750\" height=\"750\" /></p>\n<p><span style=\"font-weight:400;\">2. THÔNG TIN SẢN PHẨM: </span></p>\n<ul><li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Phù hợp sử dụng:  Đi làm, gặp gỡ đối tác. Người dùng sẽ cực kỳ tỏa sáng khi khoác lên mình hương thơm ngọt ngào mà tao nhã, mộc mạc và đầy ấn tượng.</span></li>\n<li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Thích hợp sử dụng: Tất cả các mùa trong năm.</span></li>\n<li style=\"font-weight:400;\"><span style=\"font-weight:400;\">Độ lưu hương: 6h - 8h (tùy vào cơ địa, thời tiết, môi trường làm việc,...)</span></li>\n</ul><p><img style=\"margin-left:auto;margin-right:auto;\" src=\"https://salt.tikicdn.com/ts/tmp/77/78/4b/127f8982b25e9509333bffdeddb91a85.png\" alt=\"\" width=\"750\" height=\"750\" /></p>\n<p><span style=\"font-size:11pt;\">3. CAM KẾT TỪ MORRA</span></p>\n<p><span style=\"font-size:11pt;\">- 100% hàng chính hãng.</span></p>\n<p><span style=\"font-size:11pt;\">- Đổi trả miễn phí nếu sản phẩm bị lỗi do nhà sản xuất và người bán.</span></p>\n<p><span style=\"font-size:11pt;\">- Luôn luôn lắng nghe ý kiến và đóng góp của khách hàng, tư vấn nhiệt tình. </span></p>\n<p><span style=\"font-size:11pt;\">- Cam kết tuân thủ các quy định, chính sách bán hàng của sàn thương mại điện tử.</span></p>\n<p><span style=\"font-size:11pt;\"><img src=\"https://salt.tikicdn.com/ts/tmp/21/b4/e2/c350bf3323a490298ab84aa0d9d96636.png\" alt=\"\" width=\"750\" height=\"750\" /></span></p>\n<p><span style=\"font-size:11pt;\">4. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN:</span></p>\n<p><span style=\"font-size:11pt;\">- Bảo quản: Nơi có nhiệt độ mát, tránh ánh nắng trực tiếp. Tránh thường xuyên di chuyển, rung lắc nước hoa và chú ý đóng nắp cẩn thận sau khi sử dụng.</span></p>\n<p><span style=\"font-size:11pt;\">- Hướng dẫn sử dụng: Xịt vào quần áo, cổ tay, cổ, các vị trí cần làm thơm</span></p>\n<p><span style=\"font-size:11pt;\">5. CHÍNH SÁCH BẢO HÀNH, ĐỔI TRẢ: Tất cả những trường hợp gặp vấn đề về sản phẩm đều được bảo hành hoặc đổi trả theo quy định của Morra và chính sách của Sàn</span></p>\n<p><span style=\"font-size:11pt;\"><img src=\"https://salt.tikicdn.com/ts/tmp/f0/9f/1a/919dd5bc328c48c28c6286c257474b01.png\" alt=\"\" width=\"750\" height=\"750\" /></span></p>\n<p><img title=\"\" src=\"https://salt.tikicdn.com/ts/tmp/70/92/69/3ad2e71a96fa4aead397b334eb25b5e4.png\" alt=\"\" width=\"750\" height=\"750\" /></p>\n<p><img title=\"\" src=\"https://salt.tikicdn.com/ts/tmp/19/a0/fa/0140c4016512efe5e7405b1d2588affd.png\" alt=\"\" width=\"750\" height=\"750\" /></p>\n<p><img src=\"https://salt.tikicdn.com/ts/tmp/03/ca/85/a58a203bb8264b4250e9c23279941b56.png\" alt=\"\" width=\"750\" height=\"750\" /></p><p>Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao từ nước ngoài có giá trị trên 1 triệu đồng).....</p>', 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongke`
+--
+
+DROP TABLE IF EXISTS `thongke`;
+CREATE TABLE IF NOT EXISTS `thongke` (
+  `id_thongke` int NOT NULL AUTO_INCREMENT,
+  `ngaydat` varchar(50) NOT NULL,
+  `donhang` int NOT NULL,
+  `doanhthu` varchar(100) NOT NULL,
+  `soluongban` int NOT NULL,
+  PRIMARY KEY (`id_thongke`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongke`
+--
+
+INSERT INTO `thongke` (`id_thongke`, `ngaydat`, `donhang`, `doanhthu`, `soluongban`) VALUES
+(1, '2023-01-15', 12, '500000', 10),
+(2, '2023-02-20', 5, '1200000', 25),
+(3, '2023-03-10', 44, '800000', 15),
+(4, '2023-04-05', 13, '300000', 5),
+(5, '2023-05-18', 5, '1500000', 30),
+(6, '2023-06-22', 556, '600000', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vnpay`
+--
+
+DROP TABLE IF EXISTS `vnpay`;
+CREATE TABLE IF NOT EXISTS `vnpay` (
+  `id_vnpay` int NOT NULL AUTO_INCREMENT,
+  `vnp_amount` varchar(50) NOT NULL,
+  `vnp_bankcode` varchar(50) NOT NULL,
+  `vnp_banktranno` varchar(50) NOT NULL,
+  `vnp_cardtype` varchar(50) NOT NULL,
+  `vnp_orderinfo` varchar(100) NOT NULL,
+  `vnp_paydate` varchar(50) NOT NULL,
+  `vnp_tmncode` varchar(50) NOT NULL,
+  `vnp_transactionno` varchar(50) NOT NULL,
+  `mahoadon` varchar(10) NOT NULL,
+  PRIMARY KEY (`id_vnpay`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Đang đổ dữ liệu cho bảng `vnpay`
+--
+
+INSERT INTO `vnpay` (`id_vnpay`, `vnp_amount`, `vnp_bankcode`, `vnp_banktranno`, `vnp_cardtype`, `vnp_orderinfo`, `vnp_paydate`, `vnp_tmncode`, `vnp_transactionno`, `mahoadon`) VALUES
+(1, '10000000', 'NCB', 'VNP14239647', 'ATM', 'Thanh toán đơn hàng Số 4009', '20231213111010', '5YR0WX3C', '14239647', '4009'),
+(2, '10000000', 'VNPAY', '', 'QRCODE', 'Thanh toán đơn hàng Số 0126', '20231213111535', '5YR0WX3C', '0', '0126'),
+(3, '10000000', 'NCB', 'VNP14239667', 'ATM', 'Thanh toán đơn hàng Số 0708', '20231213111753', '5YR0WX3C', '14239667', '0708'),
+(4, '186100000', 'NCB', 'VNP14239694', 'ATM', 'Thanh toán đơn hàng số 8237', '20231213112706', '5YR0WX3C', '14239694', '8237');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
