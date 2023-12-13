@@ -98,7 +98,6 @@ if (isset($_SESSION['dangky'])) {
                 </table>
             </div>
             <div class="col-lg-4">
-                <!-- Kiểm tra nếu có sản phẩm trong giỏ hàng thì hiển thị summary, ngược lại hiển thị 0 -->
                 <form class="mb-5" action="">
                     <div class="input-group">
                         <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
@@ -152,11 +151,10 @@ if (isset($_SESSION['dangky'])) {
                                     <h5 class="font-weight-bold">Total</h5>
                                     <h5 class="font-weight-bold"><?php echo number_format($tongtien); ?></h5>
                                 </div>
-                                <button class="btn btn-block btn-primary my-3 py-3" type="submit" name="submit">Thanh
-                                    toán</button>
-
                             </div>
                         </div>
+                        <button class="btn btn-block btn-primary my-3 py-3" type="submit" name="redirect">Thanh toán</button>
+
                     </div>
                 </div>
             </div>
