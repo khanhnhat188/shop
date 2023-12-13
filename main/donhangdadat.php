@@ -1,34 +1,29 @@
-<p>Đơn hàng </p>
 <?php
-if (isset($_SESSION['dangky'])) {
-    $id_dangky = $_SESSION['id_dangky'];
+include('./admin/connect/conn.php');
+
+if(isset($_GET['vnp_Amount'])){
+
+    $vnp_Amount = $_GET['vnp_Amount'];
+    $vnp_BankCode = $_GET['vnp_BankCode'];
+    $vnp_BankTranNo = $_GET['vnp_BankTranNo'];
+    $vnp_OrderInfo = $_GET['vnp_OrderInfo'];
+    $vnp_PayDate = $_GET['vnp_PayDate'];
+    $vnp_TmnCode = $_GET['vnp_TmnCode'];
+    $vnp_TransactionNo = $_GET['vnp_TransactionNo'];
+    $vnp_CardType = $_GET['vnp_CardType'];
+    $mahoadon = $_SESSION['mahoadon'];
     
-
-    // Chạy câu truy vấn SQL
-    $sql_khachhang = "SELECT * FROM dangky WHERE id_dangky = ?";
-    $stmt = $conn->prepare($sql_khachhang);
-    $stmt->bind_param("i", $id_dangky);
-    $stmt->execute();
-
-    // Lấy kết quả
-    $result = $stmt->get_result();
+    //insert database vnpay
+    $insert_vnpay = "INSERT INTO vnpay(vnp_Amount,vnp_BankCode,vnp_BankTranNo,vnp_OrderInfo,vnp_PayDate,vnp_TmnCode,vnp_TransactionNo,vnp_CardType,mahoadon) VALUES ('$vnp_Amount','$vnp_BankCode','$vnp_BankTranNo','$vnp_OrderInfo','$vnp_PayDate','$vnp_TmnCode','$vnp_TransactionNo','$vnp_CardType','$mahoadon')";
+    $cart_query = mysqli_query($conn,$insert_vnpay);
     
-    // Kiểm tra xem có dữ liệu hay không
-    if ($result->num_rows > 0) {
-        // Lấy dữ liệu từ kết quả
-        $row_khachhang = $result->fetch_assoc();
-
-        // In thông tin hoặc sử dụng thông tin theo nhu cầu của bạn
-        echo "Họ và tên: " . $row_khachhang['tenkhachhang'];
-        echo "Email: " . $row_khachhang['email'];
-        echo "Điện thoại: " . $row_khachhang['dienthoai'];
-        echo "Địa chỉ: " . $row_khachhang['diachi'];
-
-        // Thêm các trường khác tương tự...
-    } else {
-        echo "Không có dữ liệu cho id_dangky = $id_dangky";
+    
+    if($cart_query){
+        //insert gio hàng
+        echo '<h3>Giao dịch thanh toán bằng VNPAY thành công</h3>';
+        echo '<p>Vui lòng vào trang <a target="_blank" href="index.php?quanly=lichsudonhang">lịch sử đơn hàng</a> để xem chi tiết đơn hàng của bạn</p>';
+    }else{
+        echo 'Giao dịch VNPAY thất bại';
     }
-
 }
-
 ?>

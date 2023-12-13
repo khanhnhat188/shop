@@ -16,12 +16,15 @@
         // Xử lý nếu không có giá trị được chọn (mặc định hoặc xử lý khác tùy thuộc vào yêu cầu của bạn)
         $hinhthucthanhtoan = 'Không xác định';
     }
+    $tongtien = 0; // Khởi tạo biến tổng tiền
+    foreach ($_SESSION['cart'] as $value) {
+            $thanhtien = $value['soluong'] * $value['giasp'];
+            $tongtien += $thanhtien;
+    }
 
-    if($hinhthucthanhtoan == 'cash'){
-        print_r($hinhthucthanhtoan);
-    
+    if($hinhthucthanhtoan == 'cash'){    
     // Thực hiện lưu đơn hàng vào CSDL, bảng donhang
-   /* $insert_hoadon = "INSERT INTO donhang (id_dangky, madonhang, trangthai, ngaydat, hinhthucthanhtoan) VALUES ('$id_dangky', '$mahoadon', '1', '$now', '$hinhthucthanhtoan')";
+    $insert_hoadon = "INSERT INTO donhang (id_dangky, madonhang, trangthai, ngaydat, hinhthucthanhtoan) VALUES ('$id_dangky', '$mahoadon', '1', '$now', '$hinhthucthanhtoan')";
     $query_hoadon = mysqli_query($conn, $insert_hoadon);
     if ($query_hoadon) {
         foreach ($_SESSION['cart'] as $key => $value) {
@@ -29,13 +32,16 @@
             $soluong = $value['soluong'];
             $insert_chitiet = "INSERT INTO chitiethoadon (madonhang, id_sanpham, soluongmua) VALUES ('$mahoadon', '$id_sanpham', '$soluong')";
             $query_chitiet = mysqli_query($conn, $insert_chitiet);
-        }  */
+        }
+    }
+    header("location:../index.php");
+
     }elseif($hinhthucthanhtoan=='vnpay'){
         // Tích hợp thanh toán VNPAY
         $vnp_TxnRef = $mahoadon;
-        $vnp_OrderInfo = 'Thanh toán đơn hàng Số '.$mahoadon;
+        $vnp_OrderInfo = 'Thanh toán đơn hàng số '.$mahoadon;
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 100000 * 100;
+        $vnp_Amount = $tongtien * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -85,13 +91,25 @@
             , 'message' => 'success'
             , 'data' => $vnp_Url);
             if (isset($_POST['redirect'])) {
+                $_SESSION['mahoadon'] = $mahoadon;
+                $insert_hoadon = "INSERT INTO donhang (id_dangky, madonhang, trangthai, ngaydat, hinhthucthanhtoan) VALUES ('$id_dangky', '$mahoadon', '1', '$now', '$hinhthucthanhtoan')";
+                $query_hoadon = mysqli_query($conn, $insert_hoadon);
+                if ($query_hoadon) {
+                    foreach ($_SESSION['cart'] as $key => $value) {
+                        $id_sanpham = $value['id'];
+                        $soluong = $value['soluong'];
+                        $insert_chitiet = "INSERT INTO chitiethoadon (madonhang, id_sanpham, soluongmua) VALUES ('$mahoadon', '$id_sanpham', '$soluong')";
+                        $query_chitiet = mysqli_query($conn, $insert_chitiet);
+                    }
                 header('Location: ' . $vnp_Url);
                 die();
             } else {
                 echo json_encode($returnData);
             }
+            
             // vui lòng tham khảo thêm tại code demo
             }
+    }
     // Gửi mail thông báo đơn hàng
     $tieu_de = "Đơn hàng của bạn đã được tiếp nhận";
     $noi_dung = "<p>Cảm ơn bạn đã đặt hàng với mã đơn hàng: $mahoadon. Chúng tôi sẽ liên hệ với bạn sớm nhất có thể để xác nhận đơn hàng.<br><br>Trân trọng!</p>";
@@ -107,4 +125,3 @@
     $mail->maildathang($tieu_de, $noi_dung, $email); */
 
 unset($_SESSION['cart']);
-/* header("location:../index.php"); */
