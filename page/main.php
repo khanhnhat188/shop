@@ -23,12 +23,15 @@
             include("main/thanhtoan.php");
         }elseif($tam=='timkiem'){
             include("main/search.php");
-        }elseif($tam=='vanchuyen'){
-            include("main/vanchuyen.php");
-        }elseif($tam=='thongitnthanhtoan'){
-            include("main/thongtinthanhtoan.php");
+/*         }elseif($tam=='thongitnthanhtoan'){
+            include("main/thongitnthanhtoan.php"); */
         }elseif($tam=='donhangdadat'){
             include("main/donhangdadat.php");
+        }elseif($tam=='donhang'){
+            include("main/donhang.php");
+        }elseif($tam=='xemdonhang'){
+            include("main/xemdonhang.php");
+
         }else{
             include("main/index.php");
         }

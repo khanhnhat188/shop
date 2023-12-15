@@ -104,7 +104,7 @@
                             <?php
                         if (isset($_SESSION['dangky'])) {
                     ?>
-                            <a href="./index.php?quanly=thongitnthanhtoan" class="btn btn-block btn-primary my-3 py-3">Thanh toán</a>
+                            <a href="./index.php?quanly=thanhtoan" class="btn btn-block btn-primary my-3 py-3">Thanh toán</a>
                             <?php
                         }else {
                     ?>

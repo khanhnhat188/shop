@@ -21,7 +21,7 @@ if(isset($_GET['vnp_Amount'])){
     if($cart_query){
         //insert gio hàng
         echo '<h3>Giao dịch thanh toán bằng VNPAY thành công</h3>';
-        echo '<p>Vui lòng vào trang <a target="_blank" href="index.php?quanly=lichsudonhang">lịch sử đơn hàng</a> để xem chi tiết đơn hàng của bạn</p>';
+        echo '<p>Vui lòng vào trang <a target="_blank" href="index.php?quanly=donhang">lịch sử đơn hàng</a> để xem chi tiết đơn hàng của bạn</p>';
     }else{
         echo 'Giao dịch VNPAY thất bại';
     }

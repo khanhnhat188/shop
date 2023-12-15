@@ -19,6 +19,7 @@
             }
         ?>
         <li><a class="one" href="index.php?quanly=giohang">Giỏ hàng</a></li>
+        <li><a class="one" href="index.php?quanly=donhang">Lịch sử đơn hàng</a></li>
         <?php
             if (isset($_SESSION['dangky'])) {
         ?>
@@ -32,13 +33,5 @@
             }
         ?>
     </ul>
-    <div class="topnav">
-        <div class="search-container">
-            <form method="POST" action="index.php?quanly=timkiem">
-            <input type="text" placeholder="Tìm kiếm.." name="tukhoa">
-            <button type="submit" name="timkiem"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-    </div>
 </div>
 

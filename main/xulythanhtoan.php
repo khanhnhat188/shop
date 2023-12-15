@@ -119,9 +119,10 @@
         $noi_dung .= "Tổng tiền: " . number_format($value['soluong'] * $value['giasp']) . " VNĐ<br>";
     }   
 
-/*     
+    
     $email = $_SESSION['email'];
     $mail = new Mailer();
-    $mail->maildathang($tieu_de, $noi_dung, $email); */
+    $mail->maildathang($tieu_de, $noi_dung, $email);
 
 unset($_SESSION['cart']);
+?>
