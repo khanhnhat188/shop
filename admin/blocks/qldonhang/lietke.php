@@ -12,7 +12,7 @@
     <th>Địa chỉ</th>
     <th>Số điện thoại</th>
     <th>Email</th>
-    <th>Ngày đặt</th>
+    <th>Hình thức thanh toán</th>
     <th>Trạng thái</th>
     <th>Ngày đặt</th>
     <th>Quản lý</th>
@@ -29,7 +29,7 @@ while($row = mysqli_fetch_array($query_lietke)){
     <td><?php echo $row['diachi'] ?></td>
     <td><?php echo $row['dienthoai'] ?></td>
     <td><?php echo $row['email'] ?></td>
-    <td><?php echo 'ngày'?></td>
+    <td><?php echo $row['hinhthucthanhtoan'] ?></td>
     <td>
         <?php
             if($row['trangthai'] == 1){

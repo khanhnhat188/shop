@@ -13,6 +13,9 @@
     <label class="demuc">Hình ảnh</label>
     <input type="file" id="file_photo" name="hinhanh"> <br>
 
+    <label class="demuc">Tóm tắt</label> <br>
+    <textarea name="tomtat" style="resize:none"></textarea> <br>
+
     <label class="demuc">Nội dung</label> <br>
     <textarea name="noidung" style="resize:none"></textarea> <br>
 
@@ -33,11 +36,6 @@
         <option value="1">Kích hoạt</option>
         <option value="0">Ẩn</option>
     </select>
-    </select>
-    <label class="demuc">Nổi bật</label>
-    <select name="noibat">
-        <option value="3">Không</option>
-        <option value="2">Có</option>
     </select>
     <input type="submit" name="themsp" value="Thêm sản phẩm">
 </form>

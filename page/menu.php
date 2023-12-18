@@ -19,10 +19,11 @@
             }
         ?>
         <li><a class="one" href="index.php?quanly=giohang">Giỏ hàng</a></li>
-        <li><a class="one" href="index.php?quanly=donhang">Lịch sử đơn hàng</a></li>
         <?php
             if (isset($_SESSION['dangky'])) {
         ?>
+        <li><a class="one" href="index.php?quanly=donhang">Lịch sử đơn hàng</a></li>
+
         <li><a class="one" href="index.php?dangxuat=1">Đăng xuất</a></li>
         <?php
             } else {

@@ -32,10 +32,11 @@ while($row = mysqli_fetch_array($query_lietke)){
         <td><?php echo $thanhtien ?></td>
     </tr>
     <tr>
-        <td colspan="5" align="right">Tổng tiền</td>
-        <td><?php echo $thanhtien ?></td>
-    </tr>
+    
 <?php
 }
 ?>
+    <td colspan="5" align="right">Tổng tiền</td>
+        <td><?php echo $thanhtien ?></td>
+    </tr>
 </table>

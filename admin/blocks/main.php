@@ -15,6 +15,7 @@
             include 'blocks/qldmsanpham/sua.php';
         }elseif($tam == 'qlsanpham' && $query == 'them'){
             include 'blocks/qlsanpham/them.php';
+        }elseif($tam == 'qlsanpham' && $query == 'lietke'){
             include 'blocks/qlsanpham/lietke.php';
         }elseif($tam == 'qlsanpham' && $query == 'sua'){
             include 'blocks/qlsanpham/suasp.php';
