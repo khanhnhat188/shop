@@ -13,6 +13,11 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/style_main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Bán Hàng</title>
 </head>
 
@@ -21,7 +26,7 @@
         <?php
             session_start();
             include "page/header.php";
-            include "page/menu.php";
+            include "page/menu_v1.php";
             include "page/main.php";
             include "page/footer.php";
         ?>
@@ -66,6 +71,11 @@
 
     })
     </script>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
 </body>
 
 </html>
