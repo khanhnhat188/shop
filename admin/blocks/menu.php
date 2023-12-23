@@ -7,7 +7,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?action=qldmsanpham&query=them">QL
+                        <a class="nav-link" aria-current="page" href="index.php?action=qldmsanpham&query=them">QL
                             danh mục</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -23,6 +23,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?action=qldonhang&query=lietke">QL đơn hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?action=qlkhachhang&query=lietke">QL khách hàng</a>
                     </li>
                 </ul>
             </div>

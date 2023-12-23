@@ -23,6 +23,8 @@
             include 'blocks/qldonhang/lietke.php';
         }elseif($tam == 'donhang' && $query == 'xemdonhang'){
             include 'blocks/qldonhang/xemdonhang.php';
+        }elseif($tam == 'qlkhachhang' && $query == 'lietke'){
+            include 'blocks/qlkhachhang/lietke.php';
         }else{
             include 'blocks/dashboard.php';
         }

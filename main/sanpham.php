@@ -23,8 +23,7 @@
                     <h3 class="font-weight-semi-bold mb-4"><?php echo number_format($row_ct['giasp'],0,',','.').'đ';?></h3>
                     <p class="mb-4"><?php echo $row_ct['tomtat']; ?></p>
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        <button class="them" name="themgiohang" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add
-                            To Cart</button>
+                        <button class="them" name="themgiohang" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
